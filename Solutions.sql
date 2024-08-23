@@ -161,6 +161,18 @@ from fact_survey_responses
 group by Limited_edition_packaging
 order by cnt2 desc;
 
+# 13. Which type of marketing reaches the most youth (15-30) ?
+# Solution-
+with cte1 as (
+select * from dim_repondents where age in ('15-18', '19-30')
+)
+select f.Marketing_channels, count(*) as cnt
+from fact_survey_responses f
+left join cte1 c
+on f.Respondent_ID=c.Respondent_ID
+group by f.Marketing_channels
+order by cnt desc;
+
 # Some suggetion I would like to give to the business according the Data I generated-
 # 1. Try to add caffeine and Vitamins in the Drink and make Compact and Portable with Innovative design for the Cans
 # 2. Try to Fix the price Between (50-150). Two types of cans would be ideal for starting, Small can (240 ml) and Bigger can (330 ml)
